@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server Status - Welcome</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a4d2e;
+            --accent: #4f7942;
+            --light: #f0f4f1;
+            --text: #2d3e36;
+            --shadow: rgba(26, 77, 46, 0.12);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans 3', sans-serif;
+            background: linear-gradient(135deg, var(--light) 0%, #e8f5e9 100%);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 70%;
+            height: 150%;
+            background: radial-gradient(circle, rgba(79, 121, 66, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-30px, 30px) scale(1.05); }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px var(--shadow);
+            padding: 4rem;
+            position: relative;
+            animation: slideUp 0.8s ease-out;
+            border: 1px solid rgba(79, 121, 66, 0.1);
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            animation: slideUp 0.8s ease-out 0.2s backwards;
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            background: #4ade80;
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+            box-shadow: 0 0 10px rgba(74, 222, 128, 0.5);
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            animation: slideUp 0.8s ease-out 0.3s backwards;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: var(--accent);
+            margin-bottom: 3rem;
+            font-weight: 300;
+            animation: slideUp 0.8s ease-out 0.4s backwards;
+        }
+
+        .info-grid {
+            display: grid;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .info-card {
+            background: linear-gradient(135deg, var(--light), #ffffff);
+            padding: 1.5rem;
+            border-radius: 16px;
+            border-left: 4px solid var(--accent);
+            animation: slideUp 0.8s ease-out calc(0.5s + var(--delay)) backwards;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateX(8px);
+            box-shadow: 0 8px 20px var(--shadow);
+        }
+
+        .info-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .info-value {
+            font-size: 1.1rem;
+            color: var(--text);
+            font-weight: 400;
+            line-height: 1.6;
+        }
+
+        .info-value.mono {
+            font-family: 'Courier New', monospace;
+            background: rgba(26, 77, 46, 0.05);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        .project-section {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 2rem;
+            border-radius: 16px;
+            margin-top: 2rem;
+            animation: slideUp 0.8s ease-out 0.9s backwards;
+        }
+
+        .project-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-section p {
+            line-height: 1.8;
+            opacity: 0.95;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: var(--accent);
+            animation: slideUp 0.8s ease-out 1s backwards;
+        }
+
+        .decorative-line {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            margin: 2rem 0;
+            opacity: 0.3;
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 2rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="status-badge">
+            <span class="status-dot"></span>
+            Сервер активен
+        </div>
+
+        <h1>Welcome!</h1>
+        <p class="subtitle">Сервер успешно развернут и готов к работе</p>
+
+        <div class="info-grid">
+            <div class="info-card" style="--delay: 0s">
+                <div class="info-label">Администратор</div>
+                <div class="info-value">Claude</div>
+            </div>
+
+            <div class="info-card" style="--delay: 0.1s">
+                <div class="info-label">IP-адрес виртуальной машины</div>
+                <div class="info-value mono">192.168.20.28</div>
+            </div>
+        </div>
+
+        <div class="decorative-line"></div>
+
+
+        <footer>
+            <p>Server uptime: <span id="uptime">Calculating...</span></p>
+        </footer>
+    </div>
+
+    <script>
+        // Простой счетчик uptime (с момента загрузки страницы)
+        const startTime = Date.now();
+        
+        function updateUptime() {
+            const elapsed = Date.now() - startTime;
+            const seconds = Math.floor(elapsed / 1000);
+            const minutes = Math.floor(seconds / 60);
+            const hours = Math.floor(minutes / 60);
+            
+            const displayHours = hours;
+            const displayMinutes = minutes % 60;
+            const displaySeconds = seconds % 60;
+            
+            document.getElementById('uptime').textContent = 
+                `${displayHours.toString().padStart(2, '0')}:${displayMinutes.toString().padStart(2, '0')}:${displaySeconds.toString().padStart(2, '0')}`;
+        }
+        
+        updateUptime();
+        setInterval(updateUptime, 1000);
+    </script>
+</body>
+</html>
